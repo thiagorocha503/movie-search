@@ -15,7 +15,7 @@ class MovieAPIProviderImpl implements IMovieAPIProvider {
   static const String URL_MOVIE_SEARCH =
       "https://api.themoviedb.org/3/search/movie?api_key=$API_REST_KEY&query=";
   static const String URL_MOVIE_ID =
-      "https://api.themoviedb.org/3/movie/343611?api_key=$API_REST_KEY";
+      "https://api.themoviedb.org/3/movie/";
   static const URL_IMAGE = "https://image.tmdb.org/t/p/w500/";
 
   @override
@@ -43,7 +43,7 @@ class MovieAPIProviderImpl implements IMovieAPIProvider {
 
   @override
   Future<MovieDetail> findById(int id,{String lang="pt-BR"}) async {
-    String url = "$URL_MOVIE_ID$id+&language=$lang";
+    String url = "$URL_MOVIE_ID$id?api_key=$API_REST_KEY&language=$lang";
     final response = await http.get(url);
     switch (response.statusCode) {
       case 200:
