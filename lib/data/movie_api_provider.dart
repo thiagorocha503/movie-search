@@ -1,4 +1,7 @@
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -8,6 +11,7 @@ import 'package:movie_search_app/model/movie_search.dart';
 class IMovieAPIProvider {
   Future<List<MovieSearch>> findByName(String name) async => null;
   Future<MovieDetail> findById(int id) async => null;
+  CachedNetworkImageProvider getPoster(String path,{String size="w45"})=> null;
 }
 
 class MovieAPIProviderImpl implements IMovieAPIProvider {
@@ -16,7 +20,7 @@ class MovieAPIProviderImpl implements IMovieAPIProvider {
       "https://api.themoviedb.org/3/search/movie?api_key=$API_REST_KEY&query=";
   static const String URL_MOVIE_ID =
       "https://api.themoviedb.org/3/movie/";
-  static const URL_IMAGE = "https://image.tmdb.org/t/p/w500/";
+  static const BASE_URL_IMAGE = "http://image.tmdb.org/t/p";
 
   @override
   Future<List<MovieSearch>> findByName(String name,{String lang="pt-BR"}) async {
@@ -56,5 +60,13 @@ class MovieAPIProviderImpl implements IMovieAPIProvider {
       default:
         throw Exception("API REST Erro insperado");
     }
+  }
+
+  @override
+  CachedNetworkImageProvider getPoster(String path,{String size="w45"}){
+    String url = "$BASE_URL_IMAGE/$size/$path";
+    return CachedNetworkImageProvider(url);
+    
+
   }
 }

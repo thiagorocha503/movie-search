@@ -51,6 +51,7 @@ class _HomePageState extends State<HomePage> implements IMainPage{
                       padding:
                           EdgeInsets.only(left: 5, top: 5, right: 5, bottom: 5),
                       child: RaisedButton(
+                        color: Theme.of(context).primaryColor,
                         child: Text("pesquisar",
                         style: TextStyle(
                               fontSize: 16,
@@ -104,7 +105,7 @@ class _HomePageState extends State<HomePage> implements IMainPage{
 
   Widget getMovieItemList(Map data, int index){
     return ListTile(
-      leading: Icon(Icons.movie),
+      leading: Image(image: this._presenter.getPoster(data["poster_path"])),
       title: Text(data["title"]),
       subtitle: Text(data["overview"]),
       onLongPress: (){
