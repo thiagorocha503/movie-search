@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_search_app/data/movie_api_provider.dart';
+import 'package:movie_search_app/presenter/home_presenter.dart';
 import 'package:movie_search_app/presenter/presenter.dart';
 import 'package:movie_search_app/repository/movie_repository.dart';
 import 'package:movie_search_app/view/view.dart';
@@ -14,12 +15,12 @@ class _HomePageState extends State<HomePage> implements IMainPage{
   IMainPresenter _presenter;
   TextEditingController _textSearch = new TextEditingController();
   List<Map> result = [];
-  String _query = "car";
+  String _query = "";
 
   void initState(){
     super.initState();
     MovieAPIProviderImpl api = MovieAPIProviderImpl();
-    this._presenter = MainPresenterImpl(MovieRepositoryImpl(api));
+    this._presenter = HomePresenterImpl(MovieRepositoryImpl(api));
     this._presenter.setView(this);
   }
   
