@@ -7,7 +7,7 @@ void main(){
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: MainPageImpl(),
+      home: HomePage(),
     )
   );
 }

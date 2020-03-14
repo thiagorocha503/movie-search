@@ -4,12 +4,12 @@ import 'package:movie_search_app/presenter/presenter.dart';
 import 'package:movie_search_app/repository/movie_repository.dart';
 import 'package:movie_search_app/view/view.dart';
 
-class MainPageImpl extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _MainPageImplState createState() => _MainPageImplState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MainPageImplState extends State<MainPageImpl> implements IMainPage{
+class _HomePageState extends State<HomePage> implements IMainPage{
   
   IMainPresenter _presenter;
   TextEditingController _textSearch = new TextEditingController();
