@@ -76,6 +76,10 @@ class _HomePageState extends State<HomePage> implements IMainPage{
                    return Center(child: Text("${snapshot.error}"));
                  }
                  if(snapshot.hasData){
+                   var data = snapshot.data;
+                   if(data.length == 0){
+                     return Center(child:Text("Nenhum resultado encontrado"));
+                   }
                    return this.getMovieList(snapshot.data);
                  }
                  return Center(child:CircularProgressIndicator(
