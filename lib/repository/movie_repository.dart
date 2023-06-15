@@ -1,36 +1,36 @@
+import 'package:movie_search_app/data/movie_api.dart';
+import 'package:movie_search_app/language/model/language.dart';
+import 'package:movie_search_app/movie_details/model/movie.dart';
+import 'package:movie_search_app/movie_overview/model/movie_list.dart';
+import 'package:movie_search_app/movie_overview/model/result_search.dart';
 
-
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:movie_search_app/data/movie_api_provider.dart';
-import 'package:movie_search_app/model/movie_detail.dart';
-import 'package:movie_search_app/model/movie_search.dart';
-
-class IMovieRepository{
-
-  Future<List<MovieSearch>> findByName(String name) async =>null;
-  Future<MovieDetail> findById(int id) async =>null;
-  CachedNetworkImageProvider getPoster(String path,{String size="w45"})=> null;
+abstract class IMovieRepository {
+  Future<ResultSearch> getMovies({
+    required int page,
+    required Language lang,
+    MovieList list,
+  });
+  Future<Movie> getMovieByID({
+    required int id,
+    required Language lang,
+  });
 }
 
-class MovieRepositoryImpl implements IMovieRepository{
-  IMovieAPIProvider _api;
-
-  MovieRepositoryImpl(this._api);
+class MovieRepository implements IMovieRepository {
+  final IMovieApi api;
+  const MovieRepository({required this.api});
 
   @override
-  Future<MovieDetail> findById(int id) async {
-    return await this._api.findById(id);
+  Future<ResultSearch> getMovies({
+    MovieList list = MovieList.popular,
+    required int page,
+    required Language lang,
+  }) async {
+    return await api.getMovies(page: page, type: list, lang: lang);
   }
 
   @override
-  Future<List<MovieSearch>> findByName(String name) async {
-    return await  this._api.findByName(name);
+  Future<Movie> getMovieByID({required int id, required Language lang}) async {
+    return await api.getMovieById(id: id, lang: lang);
   }
-
-  @override
-  CachedNetworkImageProvider getPoster(String path, {String size = "w45"}) {
-    return this._api.getPoster(path);
-  }
-
-  
 }
